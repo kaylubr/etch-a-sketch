@@ -8,42 +8,53 @@
 </head>
 <body>
     <div class="header">Etch-a-sketch</div>
-    <div class="canvas"></div>
 
-    <div class="bottom-container">
-        <div class="tools rainbow"></div>
-        <div class="tools darken"></div>
-        <div class="tools pen"></div>
-        <div class="tools eraser"></div>
-        <div class="tools bucket"></div>
-        <div class="tools delete"></div>
+    <div class="container">
+        <div class="canvas"></div>
 
-        <div class="color-container">
-            <div class="top-section">
-                <div class="colors white"></div>
-                <div class="colors red"></div>
-                <div class="colors orange"></div>
-                <div class="colors yellow"></div>
-                <div class="colors green"></div>
-                <div class="colors blue"></div>
-                <div class="colors violet"></div>
-                <div class="colors pink"></div>
-                <div class="colors brown"></div>
+        <div class="bottom-container">
+            <div class="tool-container">
+                <div class="left-section">
+                    <div class="tools rainbow"></div>
+                    <div class="tools pen"></div>
+                    <div class="tools bucket"></div>
+                </div>
+                <div class="right-section">
+                    <div class="tools darken"></div>
+                    <div class="tools eraser"></div>
+                    <div class="tools delete"></div>
+                </div>
+            </div>  
+
+            <div class="color-container">
+                    <div class="color-con left-section">
+                        <div class="colors black"></div>
+                        <div class="colors red"></div>
+                        <div class="colors orange"></div>
+                        <div class="colors yellow"></div>
+                        <div class="colors green"></div>
+                        <div class="colors blue"></div>
+                        <div class="colors violet"></div>
+                        <div class="colors pink"></div>
+                    </div>
+
+                    <div class="color-con right-section">
+                        <div class="colors brown"></div>
+                        <div class="colors darkred"></div>
+                        <div class="colors darkorange"></div>
+                        <div class="colors darkyellow"></div>
+                        <div class="colors darkgreen"></div>
+                        <div class="colors darkviolet"></div>
+                        <div class="colors darkpink"></div>
+                        <div class="colors darkbrown"></div>
+                    </div>
             </div>
-            <div class="bottom-section">
-                <div class="colors black"></div>
-                <div class="colors darkred"></div>
-                <div class="colors darkorange"></div>
-                <div class="colors darkyellow"></div>
-                <div class="colors darkgreen"></div>
-                <div class="colors darkblue"></div>
-                <div class="colors darkviolet"></div>
-                <div class="colors darkpink"></div>
-                <div class="colors darkbrown"></div>
+            
+            <div class="delete-container">
+                <button id="change-btn">S</button>   
+                <a href="#"><img src="./img/trash-bin.svg" alt="trashbin" id="trash-icon"></a>
             </div>
         </div>
-
-        <div class="color-choice"></div>
     </div>
 </body>
 </html>
