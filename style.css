@@ -25,10 +25,12 @@ body {
 
 /* Canvas */
 .canvas {
+    display: flex;
     width: 600px;
     height: 460px;
     background-color: #FCF6F5FF;
     margin-bottom: 120px;
+    flex-direction: column;
 }
 
 .bottom-container {
@@ -110,7 +112,7 @@ body {
 .colors.violet {
     background-color: violet;
 }
-        
+
 .colors.pink {
     background-color: pink;
 }
@@ -159,4 +161,17 @@ body {
 #trash-icon {
     width: 52.5px;
     height: 50px;
+}
+
+.row {
+    display: flex;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.pixel {
+    box-sizing: border-box;
+    flex: 1;
+    border:1px solid;
+    border-color: rgba(0,0,255,0.25);
 }
