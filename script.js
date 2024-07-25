@@ -1,5 +1,8 @@
 const canvas = document.querySelector(".canvas");
 const setGridBtn = document.querySelector("#change-btn");
+const trashBtn = document.querySelector("#trash-icon");
+const colorTools = document.querySelector(".color-container");
+let color = "white";
 
 setDefaultGrid();
 
@@ -7,6 +10,26 @@ setGridBtn.addEventListener("click", () => {
     resetGrid();
     promptGridSize();
 });
+
+
+colorTools.addEventListener("click", (event) => {
+    event.preventDefault();
+    let colorClass = event.target.className;
+    let temp = colorClass.split(" ");
+    color = temp[0];
+
+    console.log(color);
+});
+
+trashBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    let pixel = document.querySelectorAll(".pixel");
+
+    pixel.forEach(cell => {
+        cell.style.backgroundColor = "white";
+    });
+
+})
 
 function makeGrid(size) {
     for (let rowCount = 0; rowCount < size; rowCount++) {
@@ -22,8 +45,8 @@ function makeGrid(size) {
 
 //RESETS THE GRID
 function resetGrid() {
-    const pixel = document.querySelectorAll(".pixel");
-    const row = document.querySelectorAll(".row");
+    let pixel = document.querySelectorAll(".pixel");
+    let row = document.querySelectorAll(".row");
     pixel.forEach(cell => {
         cell.remove();
     });
@@ -49,3 +72,5 @@ function promptGridSize() {
 
     makeGrid(size);
 }
+
+
