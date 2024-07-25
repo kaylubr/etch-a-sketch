@@ -1,5 +1,4 @@
 const canvas = document.querySelector(".canvas");
-let row = document.querySelector("row");
 
 function makeGrid(size) {
     for (let rowCount = 0; rowCount < size; rowCount++) {
@@ -12,6 +11,3 @@ function makeGrid(size) {
         }
     }
 }
-
-
-makeGrid(16);
