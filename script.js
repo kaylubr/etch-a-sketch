@@ -2,8 +2,9 @@ const canvas = document.querySelector(".canvas");
 const setGridBtn = document.querySelector("#change-btn");
 const trashBtn = document.querySelector("#trash-icon");
 const colorTools = document.querySelector(".color-container");
-const tools = document.querySelector(".tool-container");
+const toolsKit = document.querySelector(".tool-container");
 let color = "white";
+let tool;
 
 setDefaultGrid();
 
@@ -13,7 +14,7 @@ setGridBtn.addEventListener("click", () => {
     promptGridSize();
 });
 
-tools.addEventListener("click", (event) => {
+toolsKit.addEventListener("click", (event) => {
     event.preventDefault();
     let toolsClass = event.target.className;
     let temp = toolsClass.split(" ");
@@ -21,22 +22,22 @@ tools.addEventListener("click", (event) => {
 
     switch(toolUsed) {
         case "pen":
-            console.log("hello pen");
+            tool = "pen";
             break;
         case "eraser":
-            console.log("hello eraser");
+            tool = "eraser";
             break;  
         case "bucket":
-            console.log("hello bucket");
+            tool = "bucket";
             break;
         case "darken":
-            console.log("hello darken");
+            tool = "darken";
             break;
         case "rainbow":
-            console.log("hello rainbow");
+            tool = "rainbow";
             break;  
         case "line":
-            console.log("hello line");
+            tool = "line";
             break;        
     }
 });
@@ -48,13 +49,19 @@ colorTools.addEventListener("click", (event) => {
     let temp = colorClass.split(" ");
     color = temp[0];
 
+    if (color === "darkbrown") {
+        color = "rgb(114, 30, 30)";
+    } else if (color === "darkpink") {
+        color = "rgb(201, 134, 145)";
+    }
+
     console.log(color);
 });
 
 //make the canvas reset to white
 trashBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    let pixel = document.querySelectorAll(".pixel");
+    let pixel = getPixels();
 
     pixel.forEach(cell => {
         cell.style.backgroundColor = "white";
@@ -64,6 +71,7 @@ trashBtn.addEventListener("click", (event) => {
 
 //grid for canvas
 function makeGrid(size) {
+    let uniqueId = 1;
     for (let rowCount = 0; rowCount < size; rowCount++) {
         let row = document.createElement("div");
         canvas.appendChild(row).className = "row";
@@ -71,13 +79,15 @@ function makeGrid(size) {
         for (let cells = 0; cells < size; cells++) {
             let cell = document.createElement("div");
             row.appendChild(cell).className = "pixel";
+            cell.setAttribute("id", uniqueId);
+            uniqueId++;
         }
     }
 }
 
 //resets the grid
 function resetGrid() {
-    let pixel = document.querySelectorAll(".pixel");
+    let pixel = getPixels();
     let row = document.querySelectorAll(".row");
     pixel.forEach(cell => {
         cell.remove();
@@ -103,4 +113,8 @@ function promptGridSize() {
     }
 
     makeGrid(size);
+}
+
+function getPixels() {
+    return document.querySelectorAll(".pixel");
 }
