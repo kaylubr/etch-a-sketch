@@ -1,27 +1,17 @@
 const canvas = document.querySelector(".canvas");
-let row = document.querySelector(".row");
-let pixels;
-let color = "white";
+let row = document.querySelector("row");
 
-function setPixels(size) {
-    deleteCanvas();
-    for (let rowCount = 1; rowCount < size; rowCount++) {
-        for (let columnCount = 0; columnCount < size.length; columnCount++) {
-            pixels = document.createElement("div");
-            pixels.classList.add("pixels");
-            row.appendChild(pixels);
-        }
+function makeGrid(size) {
+    for (let rowCount = 0; rowCount < size; rowCount++) {
+        let row = document.createElement("div");
+        canvas.appendChild(row).className = "row";
         
-        row = row.cloneNode(true);
-        canvas.appendChild(row);
+        for (let cells = 0; cells < size; cells++) {
+            let cell = document.createElement("div");
+            row.appendChild(cell).classList = "pixel";
+        }
     }
 }
 
-function deleteCanvas() {
-    while(canvas.hasChildNodes) {
-        while(row.hasChildNodes) {
-            row.removeChild(row.firstElementChild);
-        }
-        canvas.removeChild(canvas.firstElementChild);
-    }
-}
+
+makeGrid(16);
