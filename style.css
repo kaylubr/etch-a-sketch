@@ -21,6 +21,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    flex-wrap: wrap;
 }
 
 /* Canvas */
@@ -174,4 +175,14 @@ body {
     flex: 1;
     border:1px solid;
     border-color: rgba(0,0,255,0.25);
+}
+
+#tools-btn {
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+}
+
+.tools {
+    padding: 0px;
 }
