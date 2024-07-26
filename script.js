@@ -46,7 +46,7 @@ toolsKit.addEventListener("click", (event) => {
         case "darken":
             tool = "darken";
             setOpacityToZero();
-            canvas.addEventListener("mouseover", darkenFunction);
+            canvas.addEventListener("mousedown", darkenFunction);
             removeEventsExcept("darken");
             console.log(tool);
             break;
@@ -192,7 +192,10 @@ const darkenFunction = (e) => {
     }
     uniqueId.style.opacity = `${opacityPercent}%`;
     opacityPercent = opacityPercent + 10;
-    console.log(uniqueId);
+
+    canvas.addEventListener("mouseover", holdWriteDarken);
+    canvas.addEventListener("mouseup", releaseWriteDarken);
+    container.addEventListener("mouseup", releaseWriteDarken);
 }
 
 const lineFunction = (e) => {
@@ -203,68 +206,68 @@ function removeEventsExcept(tool) {
     if (tool === "pen") {
         canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
     }
     else if (tool === "eraser") {
         canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
 
     }
     else if (tool === "bucket") {
-        canvas.removeEventListener("mouseover", eraserFunction);
-        canvas.removeEventListener("mouseover", penFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mousedown", eraserFunction);
+        canvas.removeEventListener("mousedown", penFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
 
     }
     else if (tool === "rainbow") {
-        canvas.removeEventListener("mouseover", eraserFunction);
+        canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", penFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mousedown", penFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
 
     }
     else if (tool === "darken") {
-        canvas.removeEventListener("mouseover", eraserFunction);
+        canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", penFunction);
-        canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", penFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
 
     }
     else if (tool === "line") {
-        canvas.removeEventListener("mouseover", eraserFunction);
+        canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", penFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
 
     }
     else {
-        canvas.removeEventListener("mouseover", eraserFunction);
+        canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
-        canvas.removeEventListener("mouseover", rainbowFunction);
-        canvas.removeEventListener("mouseover", darkenFunction);
-        canvas.removeEventListener("mouseover", penFunction);
+        canvas.removeEventListener("mousedown", rainbowFunction);
+        canvas.removeEventListener("mousedown", darkenFunction);
+        canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("mousedown", lineFunction);
         canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
@@ -282,6 +285,7 @@ function setOpacityToZero() {
     opacityPercent = 0;
 }
 
+// For pen tool
 function holdWrite(e) {
     let target = e.target.id;
     let uniqueId = document.getElementById(target);
@@ -293,7 +297,7 @@ function releaseWrite() {
     canvas.removeEventListener("mouseover", holdWrite);
 }
 
-
+// For eraser tool
 function holdErase(e) {
     let target = e.target.id;
     let uniqueId = document.getElementById(target);
@@ -301,11 +305,11 @@ function holdErase(e) {
     console.log(uniqueId);
 }
 
-
 function releaseErase() {
     canvas.removeEventListener("mouseover", holdErase);
 }
 
+// For rainbow tool
 function holdWriteRainbow(e) {
     let target = e.target.id;
     let uniqueId = document.getElementById(target);
@@ -315,6 +319,24 @@ function holdWriteRainbow(e) {
 function releaseWriteRainbow() {
     canvas.removeEventListener("mouseover", holdWriteRainbow);
 }
+
+// For darken tool
+function holdWriteDarken(e) {
+    let target = e.target.id;
+    let uniqueId = document.getElementById(target);
+    uniqueId.style.background = color;
+
+    if (opacityPercent >= 100) {
+        opacityPercent = 100;
+    }
+    uniqueId.style.opacity = `${opacityPercent}%`;
+    opacityPercent = opacityPercent + 10;
+}
+
+function releaseWriteDarken() {
+    canvas.removeEventListener("mouseover", holdWriteDarken);
+}
+
 
 
 
