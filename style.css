@@ -30,14 +30,38 @@ body {
     width: 600px;
     height: 460px;
     background-color: white;
-    margin-bottom: 120px;
     flex-direction: column;
 }
 
-.bottom-container {
+.right-container {
     display: flex;  
     flex-direction: column;
     gap: 5px;
+}
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+#copywrite {
+    font-size: 25px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+
+#copywrite-link {
+    text-decoration: none;
+    color: white;
+}
+
+#copywrite-link:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.762);
 }
 
 #change-btn {
