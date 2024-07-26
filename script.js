@@ -1,9 +1,13 @@
+const container = document.querySelector(".container");
 const canvas = document.querySelector(".canvas");
 const setGridBtn = document.querySelector("#change-btn");
 const trashBtn = document.querySelector("#trash-icon");
 const colorTools = document.querySelector(".color-container");
 const toolsKit = document.querySelector(".tool-container");
+let opacityPercent = 0;
 let color = "white";
+const DARKBROWN = "rgb(114, 30, 30)";
+const DARKPINK = "rgb(201, 134, 145)";
 let tool;
 
 setDefaultGrid();
@@ -23,7 +27,7 @@ toolsKit.addEventListener("click", (event) => {
     switch(toolUsed) {
         case "pen":
             tool = "pen";
-            canvas.addEventListener("mouseover", penFunction);
+            canvas.addEventListener("mousedown", penFunction);
             removeEventsExcept("pen");
             console.log(tool);
             break;
@@ -54,6 +58,8 @@ toolsKit.addEventListener("click", (event) => {
             break;  
         case "line":
             tool = "line";
+            canvas.addEventListener("mousedown", lineFunction);
+            removeEventsExcept("line");
             console.log(tool);
             break;        
     }
@@ -67,9 +73,9 @@ colorTools.addEventListener("click", (event) => {
     color = temp[0];
 
     if (color === "darkbrown") {
-        color = "rgb(114, 30, 30)";
+        color = DARKBROWN;
     } else if (color === "darkpink") {
-        color = "rgb(201, 134, 145)";
+        color = DARKPINK;
     }
 
     if (tool === "darken") setOpacityToZero();
@@ -86,7 +92,7 @@ trashBtn.addEventListener("click", (event) => {
         cell.style.backgroundColor = "white";
         cell.style.opacity = "100%";
     });
-
+    removeEventsExcept(tool);
 })
 
 //grid for canvas
@@ -100,6 +106,7 @@ function makeGrid(size) {
             let cell = document.createElement("div");
             row.appendChild(cell).className = "pixel";
             cell.setAttribute("id", uniqueCount.toString());
+            cell.setAttribute("draggable", "false");
             uniqueCount++;
         }
     }
@@ -144,6 +151,14 @@ const penFunction = (e) => {
     let uniqueId = document.getElementById(target);
     uniqueId.style.backgroundColor = color;
     uniqueId.style.opacity = "100";
+    canvas.addEventListener("mouseover", hold);
+    canvas.addEventListener("mouseup", release);
+    container.addEventListener("mouseup", release);
+
+
+    console.log(document.getElementById(e.target.id))
+    console.log(e)
+
 }
 
 const eraserFunction = (e) => {
@@ -167,7 +182,6 @@ const rainbowFunction = (e) => {
     uniqueId.style.backgroundColor = `rgb(${getRandomNumber()}, ${getRandomNumber()}, ${getRandomNumber()})`;
 }
 
-let opacityPercent = 0;
 const darkenFunction = (e) => {
     let target = e.target.id;
     let uniqueId = document.getElementById(target);
@@ -181,41 +195,45 @@ const darkenFunction = (e) => {
     console.log(uniqueId);
 }
 
+const lineFunction = (e) => {
+    
+}
+
 function removeEventsExcept(tool) {
     if (tool === "pen") {
         canvas.removeEventListener("mouseover", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
         canvas.removeEventListener("mouseover", rainbowFunction);
         canvas.removeEventListener("mouseover", darkenFunction);
-        // canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mouseover", lineFunction);
     }
     else if (tool === "eraser") {
         canvas.removeEventListener("mouseover", penFunction);
         canvas.removeEventListener("click", bucketFunction);
         canvas.removeEventListener("mouseover", rainbowFunction);
         canvas.removeEventListener("mouseover", darkenFunction);
-        // canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mouseover", lineFunction);
     }
     else if (tool === "bucket") {
         canvas.removeEventListener("mouseover", eraserFunction);
         canvas.removeEventListener("mouseover", penFunction);
         canvas.removeEventListener("mouseover", rainbowFunction);
         canvas.removeEventListener("mouseover", darkenFunction);
-        // canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mouseover", lineFunction);
     }
     else if (tool === "rainbow") {
         canvas.removeEventListener("mouseover", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
         canvas.removeEventListener("mouseover", penFunction);
         canvas.removeEventListener("mouseover", darkenFunction);
-        // canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mouseover", lineFunction);
     }
     else if (tool === "darken") {
         canvas.removeEventListener("mouseover", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
         canvas.removeEventListener("mouseover", rainbowFunction);
         canvas.removeEventListener("mouseover", penFunction);
-        // canvas.removeEventListener("mouseover", lineFunction);
+        canvas.removeEventListener("mouseover", lineFunction);
     }
     else if (tool === "line") {
         canvas.removeEventListener("mouseover", eraserFunction);
@@ -224,6 +242,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mouseover", darkenFunction);
         canvas.removeEventListener("mouseover", penFunction);
     }
+    else {
+        canvas.removeEventListener("mouseover", eraserFunction);
+        canvas.removeEventListener("click", bucketFunction);
+        canvas.removeEventListener("mouseover", rainbowFunction);
+        canvas.removeEventListener("mouseover", darkenFunction);
+        canvas.removeEventListener("mouseover", penFunction);
+        canvas.removeEventListener("mousedown", lineFunction);
+    }
+
+    
 }
 
 function getRandomNumber() {
@@ -234,6 +262,13 @@ function setOpacityToZero() {
     opacityPercent = 0;
 }
 
-function setOpacityToOne() {
-    opacityPercent = 100;
+function hold(e) {
+    let target = e.target.id;
+    let uniqueId = document.getElementById(target);
+    uniqueId.style.backgroundColor = color;
+    console.log(uniqueId);
+}
+
+function release() {
+    canvas.removeEventListener("mouseover", hold);
 }
