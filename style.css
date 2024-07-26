@@ -83,6 +83,10 @@ body {
     flex: 1;
 }
 
+.colors:hover, #trash-icon:hover, button:hover {
+    transform: scale(1.1);
+}
+
 .color-con {
     display: flex;
     width: 20px;
