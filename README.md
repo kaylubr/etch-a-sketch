@@ -1,6 +1,6 @@
 # etch-a-sketch
 
-["This"](https://kaylubr.github.io/etch-a-sketch/) is the live preview.
+[This](https://kaylubr.github.io/etch-a-sketch/) is the live preview.
 
 This project in The Odin Project foundation section that recreates the classic Etch-a-Sketch toy using HTML, CSS, and JavaScript. Users can draw on a grid by hovering over it with their mouse. Additional features may include:
 
