@@ -133,7 +133,7 @@ function setDefaultGrid() {
 
 //prompt for setting the grid size
 function promptGridSize() {
-    let size = prompt("Specify grid size (e.g., 16x16), with dimensions ranging from 1 to 100.");
+    let size = prompt("Specify grid size (e.g., 16), with dimensions ranging from 1 to 100.");
 
     if(size < 1 || size > 100) {
         setDefaultGrid();
