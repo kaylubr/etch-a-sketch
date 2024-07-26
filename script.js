@@ -93,6 +93,7 @@ trashBtn.addEventListener("click", (event) => {
         cell.style.opacity = "100%";
     });
     removeEventsExcept(tool);
+    resetLine();
 })
 
 //grid for canvas
@@ -199,7 +200,13 @@ const darkenFunction = (e) => {
 }
 
 const lineFunction = (e) => {
-    
+    let target = e.target.id;
+    let uniqueId = document.getElementById(target);
+    uniqueId.classList.add("line-color");
+
+    canvas.addEventListener("mouseover", holdLine);
+    canvas.addEventListener("mouseup", releaseLine);
+    container.addEventListener("mouseup", releaseLine);
 }
 
 function removeEventsExcept(tool) {
@@ -209,8 +216,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", rainbowFunction);
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
     else if (tool === "eraser") {
         canvas.removeEventListener("mousedown", penFunction);
@@ -218,8 +233,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", rainbowFunction);
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
 
     }
     else if (tool === "bucket") {
@@ -228,9 +251,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", rainbowFunction);
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
-
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
     else if (tool === "rainbow") {
         canvas.removeEventListener("mousedown", eraserFunction);
@@ -238,9 +268,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
-
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
     else if (tool === "darken") {
         canvas.removeEventListener("mousedown", eraserFunction);
@@ -248,9 +285,16 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", rainbowFunction);
         canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
-
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
     else if (tool === "line") {
         canvas.removeEventListener("mousedown", eraserFunction);
@@ -258,10 +302,18 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", rainbowFunction);
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", penFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
-
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
+
     else {
         canvas.removeEventListener("mousedown", eraserFunction);
         canvas.removeEventListener("click", bucketFunction);
@@ -269,12 +321,17 @@ function removeEventsExcept(tool) {
         canvas.removeEventListener("mousedown", darkenFunction);
         canvas.removeEventListener("mousedown", penFunction);
         canvas.removeEventListener("mousedown", lineFunction);
-        canvas.removeEventListener("mouseup", releaseErase);
         canvas.removeEventListener("mouseup", releaseWrite);
-
+        canvas.removeEventListener("mouseup", releaseErase);
+        canvas.removeEventListener("mouseup", releaseWriteRainbow);
+        canvas.removeEventListener("mouseup", releaseWriteDarken);
+        canvas.removeEventListener("mouseup", releaseLine);
+        container.removeEventListener("mouseup", releaseWrite);
+        container.removeEventListener("mouseup", releaseErase);
+        container.removeEventListener("mouseup", releaseWriteRainbow);
+        container.removeEventListener("mouseup", releaseWriteDarken);
+        container.removeEventListener("mouseup", releaseLine);
     }
-
-    
 }
 
 function getRandomNumber() {
@@ -337,6 +394,23 @@ function releaseWriteDarken() {
     canvas.removeEventListener("mouseover", holdWriteDarken);
 }
 
+function holdLine(e) {
+    let target = e.target.id;
+    let uniqueId = document.getElementById(target);
+    uniqueId.classList.add("line-color");
+}
 
+function releaseLine(e) {
+    let classesToBeColored = document.querySelectorAll(".line-color");
+    classesToBeColored.forEach(eachClass => {
+        eachClass.style.backgroundColor = color;
+    });
+    canvas.removeEventListener("mouseover", holdLine);
+}
 
-
+function resetLine(e) {
+    let wholeCanvas = getPixels();
+    wholeCanvas.forEach(eachPixel => {
+        eachPixel.classList.remove("line-color");
+    });
+}
