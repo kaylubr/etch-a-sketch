@@ -29,7 +29,7 @@ body {
     display: flex;
     width: 600px;
     height: 460px;
-    background-color: #FCF6F5FF;
+    background-color: white;
     margin-bottom: 120px;
     flex-direction: column;
 }
