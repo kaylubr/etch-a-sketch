@@ -4,10 +4,11 @@ const setGridBtn = document.querySelector("#change-btn");
 const trashBtn = document.querySelector("#trash-icon");
 const colorTools = document.querySelector(".color-container");
 const toolsKit = document.querySelector(".tool-container");
-let opacityPercent = 0;
-let color = "white";
 const DARKBROWN = "rgb(114, 30, 30)";
 const DARKPINK = "rgb(201, 134, 145)";
+
+let opacityPercent = 0;
+let color = "white";
 let tool;
 
 setDefaultGrid();
